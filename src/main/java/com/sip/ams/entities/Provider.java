@@ -1,10 +1,14 @@
 package com.sip.ams.entities;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -41,6 +45,7 @@ public class Provider {
         return id;
     }
 
+    
     public void setName(String name) {
         this.name = name;
     }
@@ -60,4 +65,16 @@ public class Provider {
     public String getAddress() {
         return address;
     }
+    
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "provider")
+    private List<Article> articles;
+
+	public List<Article> getArticles() {
+		return articles;
+	}
+
+	public void setArticles(List<Article> articles) {
+		this.articles = articles;
+	}
+
 }
